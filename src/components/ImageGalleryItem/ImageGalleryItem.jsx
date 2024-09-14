@@ -1,64 +1,95 @@
-import React, { Component } from 'react';
+
+import React, { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import css from './ImageGalleryItem.module.css';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    isModalOpen: false,
+export const ImageGalleryItem = ({ imageUrl }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
-  openModal = () => {
-    this.setState({ isModalOpen: true });
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  };
+  return (
+    <li className={css.ImageGalleryItem} onClick={openModal}>
+      <img className={css.ImageGalleryItemImage} src={imageUrl} alt="" />
+      {isModalOpen && (
+        <Modal
+          imageUrl={imageUrl}
+          altText="Large version"
+          onClose={closeModal}
+        />
+      )}
+    </li>
+  );
+};
 
-  render() {
-    const { imageUrl } = this.props;
-    const { isModalOpen } = this.state;
 
-    return (
-      <li className={css.ImageGalleryItem} onClick={this.openModal}>
-        <img className={css.ImageGalleryItemImage} src={imageUrl} alt="" />
-        {isModalOpen && (
-          <Modal
-            imageUrl={imageUrl}
-            altText="Large version"
-            onClose={this.closeModal}
-          />
-        )}
-      </li>
-    );
-  }
-}
-
-// import React, { useState } from 'react';
+// import React, { Component } from 'react';
 // import { Modal } from '../Modal/Modal';
 // import css from './ImageGalleryItem.module.css';
 
-// export const ImageGalleryItem = ({ imageUrl }) => {
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-
-//   const openModal = () => {
-//     setIsModalOpen(true);
+// export class ImageGalleryItem extends Component {
+//   state = {
+//     isModalOpen: false,
 //   };
 
-//   const closeModal = () => {
-//     setIsModalOpen(false);
+//   openModal = () => {
+//     this.setState({ isModalOpen: true });
 //   };
 
-//   return (
-//     <li className={css.ImageGalleryItem} onClick={openModal}>
-//       <img className={css.ImageGalleryItemImage} src={imageUrl} alt="" />
-//       {isModalOpen && (
-//         <Modal
-//           imageUrl={imageUrl}
-//           altText="Large version"
-//           onClose={closeModal}
-//         />
-//       )}
-//     </li>
-//   );
-// };
+//   closeModal = () => {
+//     this.setState({ isModalOpen: false });
+//   };
+
+//   render() {
+//     const { imageUrl } = this.props;
+//     const { isModalOpen } = this.state;
+
+//     return (
+//       <li className={css.ImageGalleryItem} onClick={this.openModal}>
+//         <img className={css.ImageGalleryItemImage} src={imageUrl} alt="" />
+//         {isModalOpen && (
+//           <Modal
+//             imageUrl={imageUrl}
+//             altText="Large version"
+//             onClose={this.closeModal}
+//           />
+//         )}
+//       </li>
+//     );
+//   }
+// }
+
+// // import React, { useState } from 'react';
+// // import { Modal } from '../Modal/Modal';
+// // import css from './ImageGalleryItem.module.css';
+
+// // export const ImageGalleryItem = ({ imageUrl }) => {
+// //   const [isModalOpen, setIsModalOpen] = useState(false);
+
+// //   const openModal = () => {
+// //     setIsModalOpen(true);
+// //   };
+
+// //   const closeModal = () => {
+// //     setIsModalOpen(false);
+// //   };
+
+// //   return (
+// //     <li className={css.ImageGalleryItem} onClick={openModal}>
+// //       <img className={css.ImageGalleryItemImage} src={imageUrl} alt="" />
+// //       {isModalOpen && (
+// //         <Modal
+// //           imageUrl={imageUrl}
+// //           altText="Large version"
+// //           onClose={closeModal}
+// //         />
+// //       )}
+// //     </li>
+// //   );
+// // };
